@@ -1,0 +1,342 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+
+    border: none;
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+
+/*dev_style*/
+.pad_0 {
+    padding: 0;
+    margin: 0;
+}
+
+.over_hid {
+    overflow: hidden;
+}
+.index_head {
+    background: url("../img/index_head_bg.jpg");
+    background-size: cover;
+    height: 80vh;
+    background-position: center;
+}
+
+.index_head h1 {
+    color: #fff;
+    text-align: center;
+    margin-top: 10%;
+    font-size: 3em;
+}
+
+.index_head h2 {
+    color: #fff;
+    text-align: center;
+    font-size: 1.6em;
+}
+
+.modal-dialog {
+    width: 25%;
+}
+
+.modal-dialog h4 {
+    font-size: 1em;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.navbar-nav li a {
+    color: #fff;
+}
+
+.navbar-right li:nth-child(2),
+.navbar-right li:nth-child(3) {
+    float: right;
+}
+
+.navbar-fixed-top {
+    padding: 10px 0px;
+}
+
+.navbar-brand {
+    padding: 0px;
+}
+
+#signupform-gender .radio {
+    display: inline-block;
+}
+
+#form-signup .form-group:nth-child(3),
+#form-signup .form-group:nth-child(4) {
+    width: 47%;
+    float: left;
+}
+#form-signup .form-group:nth-child(4) {
+    float: right;
+}
+
+#form-signup input {
+    border: none;
+    box-shadow: none;
+    border-bottom: 1px solid #000;
+    border-radius: 0px;
+    padding: 5px;
+}
+
+#form-signup .btn-primary {
+    background: #72cfff;
+    border: none;
+    border-radius: 20px;
+    margin: 0 auto;
+    display: block;
+    padding: 7px 60px;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+#signupform-gender label {
+    color: #999;
+}
+
+.btn-link,
+#w1 li:nth-child(2){
+    color: #05aaff !important;
+    background: #fff;
+    border-radius: 25px;
+    padding: 7px 60px;
+    margin-top: 8px;
+}
+#w1 li:nth-child(2) a {
+    color: #72cfff;
+    padding: 0px;
+}
+
+#w1 li:nth-child(2) a:hover {
+    background: none;
+}
+
+.btn-link:hover,
+#w1 li:nth-child(3) {
+    color: #05aaff;
+    background: #fff;
+    text-decoration: none;
+}
+
+#w1 li a:hover,
+#w1 li a:focus,
+#w2 li a:hover,
+#w2 li a:focus {
+    background: none;
+}
+
+.help-block {
+    color: #ce2626;
+    font-size: 0.8em;
+}
+
+#w2 {
+    margin-left: 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #202020;
+    color: #fff;
+}
+
+.index_content h2 {
+    text-align: center;
+    margin: -40px 0px 60px;
+}
+
+.index_content .card {
+    background: #333;
+    width: 100%;
+    height: auto;
+    position: relative;
+    cursor: pointer;
+    top: 0px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 0px 0px 0px #9ba5af;
+    -moz-box-shadow: 0px 0px 0px 0px #9ba5af;
+    box-shadow: 0px 0px 0px 0px #9ba5af;
+    transition: 0.3s;
+}
+
+.index_content .card:hover {
+    top: -10px;
+    -webkit-box-shadow: 0px 5px 10px 0px #9ba5af;
+    -moz-box-shadow: 0px 5px 10px 0px #9ba5af;
+    box-shadow: 0px 5px 10px 0px #9ba5af;
+}
+
+.index_content .card img {
+    width: 100%;
+}
+
+.index_content h4 {
+    text-align: center;
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+    bottom: 0px;
+    margin: 0px;
+}
+
+.recommendation_content .card img {
+    width: 100%;
+    height: 260px;
+}
+
+.recommendation_content .card {
+    width: 100%;
+    height: auto;
+    position: relative;
+    cursor: pointer;
+    top: 0px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(168,168,168,1);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(168,168,168,1);
+    box-shadow: 0px 0px 0px 0px rgba(168,168,168,1);
+    transition: 0.3s;
+}
+
+.recommendation_content .card:hover {
+    top: -10px;
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(168,168,168,1);
+    -moz-box-shadow: 0px 5px 10px 0px rgba(168,168,168,1);
+    box-shadow: 0px 5px 10px 0px rgba(168,168,168,1);
+}
+
+.recommendation_content .card h4 {
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: -5px;
+    left: 10px;
+}
+
+.recommendation_content {
+    position: relative;
+    top: -180px;
+}
+
+.recommendation_content h2 {
+    font-size: 1.3em;
+    color: #fff;
+}
