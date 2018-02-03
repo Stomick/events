@@ -22,6 +22,9 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
     ];
+	public $jsOptions = array(
+		'position' => \yii\web\View::POS_HEAD
+	);
     public $js = [
     ];
     public $depends = [

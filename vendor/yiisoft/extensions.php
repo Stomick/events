@@ -57,4 +57,23 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
     ),
   ),
+  'bupy7/yii2-widget-cropbox' => 
+  array (
+    'name' => 'bupy7/yii2-widget-cropbox',
+    'version' => '5.1.1.0',
+    'alias' => 
+    array (
+      '@bupy7/cropbox' => $vendorDir . '/bupy7/yii2-widget-cropbox/src',
+      '@bupy7/cropbox/tests' => $vendorDir . '/bupy7/yii2-widget-cropbox/tests',
+    ),
+  ),
+  'yiisoft/yii2-imagine' => 
+  array (
+    'name' => 'yiisoft/yii2-imagine',
+    'version' => '2.1.0.0',
+    'alias' => 
+    array (
+      '@yii/imagine' => $vendorDir . '/yiisoft/yii2-imagine',
+    ),
+  ),
 );

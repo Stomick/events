@@ -20,6 +20,7 @@ class ComposerStaticInita459a25ecf97820763a9aa695c82eeff
         array (
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
+            'yii\\imagine\\' => 12,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
@@ -34,6 +35,11 @@ class ComposerStaticInita459a25ecf97820763a9aa695c82eeff
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
+        ),
+        'b' => 
+        array (
+            'bupy7\\cropbox\\tests\\' => 20,
+            'bupy7\\cropbox\\' => 14,
         ),
         'W' => 
         array (
@@ -85,6 +91,10 @@ class ComposerStaticInita459a25ecf97820763a9aa695c82eeff
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
         ),
+        'yii\\imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine',
+        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
@@ -118,6 +128,14 @@ class ComposerStaticInita459a25ecf97820763a9aa695c82eeff
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'bupy7\\cropbox\\tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bupy7/yii2-widget-cropbox/tests',
+        ),
+        'bupy7\\cropbox\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bupy7/yii2-widget-cropbox/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -200,6 +218,13 @@ class ComposerStaticInita459a25ecf97820763a9aa695c82eeff
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
+            ),
+        ),
+        'I' => 
+        array (
+            'Imagine' => 
+            array (
+                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
             ),
         ),
         'H' => 

@@ -11,7 +11,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
-
+use app\models\UploadForm;
+use yii\web\UploadedFile;
 class SiteController extends Controller
 {
     /**
@@ -125,6 +126,20 @@ class SiteController extends Controller
         return $this->render('individual' );
     }
 
+	public function actionUpload()
+	{
+		$model = new UploadForm();
+
+		if (Yii::$app->request->isPost) {
+			$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+			if ($model->upload()) {
+				// file is uploaded successfully
+				return;
+			}
+		}
+		return var_dump($model);
+		//return $this->render('upload', ['model' => $model]);
+	}
     public function actionSignup()
     {
 
@@ -141,7 +156,7 @@ class SiteController extends Controller
 	            return $this->goHome();
             }
         }else{
-	        return $this->goHome();
+	      //  return $this->goHome();
         }
 
         return $this->render('signup', [
