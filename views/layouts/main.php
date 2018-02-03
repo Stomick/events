@@ -100,12 +100,16 @@ AppAsset::register($this);
                 ])->label(false); ?>
                 <?= $form->field($signmodel, 'username')->textInput(['autofocus' => true, 'placeholder' => 'Введите имя'])->label(false) ?>
                 <?= $form->field($signmodel, 'surename')->textInput(['autofocus' => true, 'placeholder' => 'Введите фамилию'])->label(false) ?>
-                <?= $form->field($signmodel, 'email')->textInput(['autofocus' => true, 'placeholder' => 'Введите Вашу почту'])->label(false) ?>
+                <?= $form->field($signmodel, 'email')->input('email',['placeholder' => 'Введите Вашу почту'])->label(false) ?>
                 <?= $form->field($signmodel, 'password')->passwordInput(['autofocus' => true, 'placeholder' => 'Введите пароль'])->label(false) ?>
                 <?= $form->field($signmodel, 'conf_password')->passwordInput(['autofocus' => true, 'placeholder' => 'Введите пароль еше раз'])->label(false) ?>
                 <?= $form->field($signmodel, 'birthday')->widget(\yii\jui\DatePicker::className(), [
                     'language' => 'ru',
                     'dateFormat' => 'yyyy-MM-dd',
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'changeYear'=> true,
+                        ]
                 ])->label(false) ?>
                 <?= $form->field($signmodel, 'rememberMe')->checkbox()->label('Запомнить меня') ?>
                 <div class="form-group">

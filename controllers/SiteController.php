@@ -30,7 +30,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','login' , 'signup' ,'individual' , 'category'],
+                        'actions' => ['logout', 'login' ,'signup', 'individual' , 'category'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -132,15 +132,20 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (!Yii::$app->getUser()->login($user)) {
+                if (!Yii::$app->getUser()->login($user) || $user == null) {
+                	var_dump($user);
                     return $this->goHome();
                 }
             }
+            else{
+	            return $this->goHome();
+            }
+        }else{
+	        return $this->goHome();
         }
 
         return $this->render('signup', [
             'model' => $model,
-            'user' => $user
         ]);
     }
 
