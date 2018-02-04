@@ -33,6 +33,7 @@ AppAsset::register($this);
 <div class="wrap">
 
     <?php
+
     NavBar::begin([
         'brandLabel' => Html::img('img/logo.png'),
         'brandUrl' => Yii::$app->homeUrl,
@@ -93,7 +94,7 @@ AppAsset::register($this);
                 <h4>Зарегистрируйтесь с помощью соц. сетей</h4>
                 <h4>Или пройдите обычную регистрация</h4>
                 <?php $signmodel = new SignupForm(); ?>
-                <?php $form = ActiveForm::begin(['id' => 'form-signup', 'action' => 'signup.html', 'method' => 'post']); ?>
+                <?php $form = ActiveForm::begin(['id' => 'form-signup', 'action' => '/signup.html', 'method' => 'post']); ?>
                 <?= $form->field($signmodel, 'gender')->radioList([
                     'мужской' => 'Мужчина',
                     'женский' => 'Женщина',
@@ -138,7 +139,7 @@ AppAsset::register($this);
             <div class="modal-body">
                 <h4>Или с помощью почты</h4>
                 <?php $loginmodel = new \app\models\LoginForm(); ?>
-                <?php $loginform = ActiveForm::begin(['id' => 'form-login', 'action' => 'login.html', 'method' => 'post']); ?>
+                <?php $loginform = ActiveForm::begin(['id' => 'form-login', 'action' => '/login.html', 'method' => 'post']); ?>
 
                 <?= $loginform->field($loginmodel, 'email')->textInput(['autofocus' => true, 'placeholder' => 'Введите Вашу почту'])->label(false) ?>
                 <?= $loginform->field($loginmodel, 'password')->passwordInput(['autofocus' => true, 'placeholder' => 'Введите пароль'])->label(false) ?>

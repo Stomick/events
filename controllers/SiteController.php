@@ -13,6 +13,8 @@ use app\models\ContactForm;
 use app\models\SignupForm;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+use yii\base\UnknownClassException;
+
 class SiteController extends Controller
 {
     /**
@@ -26,12 +28,12 @@ class SiteController extends Controller
                 'only' => ['login', 'logout', 'signup' , 'category'],
                 'rules' => [
                     [
-                        'actions' => ['login' , 'signup' , 'individual'],
+                        'actions' => ['login' , 'signup' , 'account'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'login' ,'signup', 'individual' , 'category'],
+                        'actions' => ['logout', 'login' ,'signup', 'account' , 'category'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -67,6 +69,7 @@ class SiteController extends Controller
      *
      * @return string
      */
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -119,11 +122,11 @@ class SiteController extends Controller
             }
         }
 
-        return $this->redirect('individual.html');
+        return $this->redirect('account.html');
     }
 
-    public function actionIndividual(){
-        return $this->render('individual' );
+    public function actionAccount(){
+        return $this->render('account' );
     }
 
 	public function actionUpload()

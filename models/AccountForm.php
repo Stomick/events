@@ -9,7 +9,7 @@ use app\models\User;
  * Signup form
  */
 
-class IndividualForm extends Model
+class AccountForm extends Model
 {
     public $user;
     /**
