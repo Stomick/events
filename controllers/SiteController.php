@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\UserOptions;
+use app\models\UserSave;
+use app\models\User;
+use app\models\AccountModel;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -25,15 +29,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'logout', 'signup' , 'category'],
+                'only' => ['login', 'logout', 'signup' , 'category' , 'regcomplited'],
                 'rules' => [
                     [
-                        'actions' => ['login' , 'signup' , 'account'],
+                        'actions' => ['login' , 'signup' , 'account' , 'regcomplited'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'login' ,'signup', 'account' , 'category'],
+                        'actions' => ['logout', 'login' ,'signup', 'regcomplited', 'account' , 'category'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -72,7 +76,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index' , ['index' => true]);
     }
 
     /**
@@ -122,11 +126,36 @@ class SiteController extends Controller
             }
         }
 
-        return $this->redirect('account.html');
+        return $this->redirect('account');
     }
 
+    public function actionRegcomplited()
+    {
+        $model = new UserOptions();
+        foreach (Yii::$app->request->post()['UserOptions'] as $k => $v){
+            $model[$k] = $v;
+        }
+        $model['user_id_options'] = Yii::$app->user->getId();
+        echo $model->complited();
+
+    }
+
+
     public function actionAccount(){
-        return $this->render('account' );
+	    if (!Yii::$app->user->getId()) {
+		    return $this->goHome();
+	    }else {
+		    $account = (new \yii\db\Query())
+			    ->from('user')
+		                    ->where([
+							    'user.user_id' => Yii::$app->user->getId(),
+							    'status' => User::STATUS_ACTIVE,
+						    ])->join(	'inner join',
+				    'user_details',
+				    'user_details.user_id = user.user_id')
+		    ->one();
+	    }
+        return $this->render('account' ,['account' => $account]);
     }
 
 	public function actionUpload()
@@ -140,7 +169,7 @@ class SiteController extends Controller
 				return;
 			}
 		}
-		return var_dump($model);
+		return $model;
 		//return $this->render('upload', ['model' => $model]);
 	}
     public function actionSignup()
@@ -159,9 +188,16 @@ class SiteController extends Controller
 	            return $this->goHome();
             }
         }else{
-	      //  return $this->goHome();
+	        return $this->goHome();
         }
 
+        if(!UserSave::find()
+            ->where(['user_id' => Yii::$app->user->getId()])
+            ->one()){
+        $options = new UserSave();
+        $options->user_id = Yii::$app->user->getId();
+        $options->save();
+        }
         return $this->render('signup', [
             'model' => $model,
         ]);

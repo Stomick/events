@@ -59,7 +59,7 @@ $config = [
 			    [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'suffix' => '.html',
+            'suffix' => '',
             'rules' => [
 
                 '<action>' => 'site/<action>',

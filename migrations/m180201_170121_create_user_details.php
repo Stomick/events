@@ -37,9 +37,22 @@ class m180201_170121_create_user_details extends Migration
         $this->createTable('user_details', [
             'user_details_id' => $this->primaryKey(),
             'user_id' => $this->integer(11)->notNull(),
+            'userAvatar' => $this->text(65000)->defaultValue(Null),
+            'userImage' => $this->text(65000)->defaultValue(Null),
+            'userInfo' => $this->text(5000)->defaultValue(Null),
+            'userCategories' => $this->text(250)->defaultValue(Null),
+            'userPhone' => $this->text(25)->defaultValue(Null),
+            'userCity' => $this->text(50)->defaultValue(Null),
+            'userVK' => $this->text(255)->defaultValue(Null),
+            'userFB' => $this->text(255)->defaultValue(Null),
+            'userInstagram' => $this->text(255)->defaultValue(Null),
+            'userTwitter' => $this->text(255)->defaultValue(Null),
+            'userRating' => $this->integer(60)->defaultValue(Null),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+
+
     }
 
     public function down()
