@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-
+use app\models\User;
 /**
  * Signup form
  */
@@ -18,6 +18,7 @@ class SignupForm extends Model {
 	public $conf_password;
 	public $gender;
 	public $rememberMe;
+
 
 	/**
 	 * @inheritdoc
@@ -37,6 +38,7 @@ class SignupForm extends Model {
 
 	public function rules() {
 		return [
+//			[ 'username', 'match', 'pattern' => '/^[А-я]\w*$/i'],
 			[ 'username', 'trim' ],
 			[ 'username', 'required' ],
 			[ 'username', 'string', 'min' => 2, 'max' => 25 ],
@@ -49,9 +51,10 @@ class SignupForm extends Model {
 			[ 'gender', 'required'],
 			[ 'email', 'trim' ],
 			[ 'email', 'email' ],
-			[ 'email', 'string', 'max' => 25 ],
+			['email', 'unique', 'targetClass'=> 'app\models\User' , 'message' => 'Такой емаил уже занят', ],
+			[ 'email', 'string', 'max' => 50 ],
 			[
-				[ 'password', 'conf_password' ],
+				[ 'conf_password', 'password',  ],
 				'required',
 				'when' => function ( $model ) {
 					return ( $model->password == $model->conf_password );
@@ -73,11 +76,13 @@ class SignupForm extends Model {
 
 	public function signup() {
 
-		if ( null != User::findOne(['email' => $this->email]) || !$this->validate() ) {
+		$user           = new User();
+
+		if ( null != $user->findOne(['email' => $this->email]) || !$this->validate() ) {
 			return null;
 		}
 
-		$user           = new User();
+
 		$user->username = $this->username;
 		$user->surename = $this->surename;
 		$user->birthday = $this->birthday;

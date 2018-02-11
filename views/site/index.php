@@ -2,13 +2,13 @@
 
 /* @var $this yii\web\View */
 
-use app\models\Category;
+use app\models\CategoryModel;
 use yii\bootstrap\Dropdown;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 $this->title = 'Skiper';
-$category = new Category();
+$category = new CategoryModel();
 
 ?>
 <div class="container-fluid index_head pad_0 over_hid">

@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Category;
+use app\models\CategoryModel;
 use app\models\UserOptions;
 use app\models\UserSave;
 use app\models\User;
@@ -88,7 +88,7 @@ class SiteController extends Controller
 
     public function actionCategory()
     {
-        $model = new Category();
+        $model = new CategoryModel();
         if(intval(Yii::$app->request->get()) > 0){
           $model->getOneCategory(Yii::$app->request->get());
         }
@@ -135,7 +135,7 @@ class SiteController extends Controller
         foreach (Yii::$app->request->post()['UserOptions'] as $k => $v){
             $model[$k] = $v;
         }
-        $model['user_id_options'] = Yii::$app->user->getId();
+        $model['user_id'] = Yii::$app->user->getId();
         echo $model->complited();
 
     }
@@ -147,6 +147,18 @@ class SiteController extends Controller
 	    }else {
 		    $account = (new \yii\db\Query())
 			    ->from('user')
+			                ->select(
+			                	[	'user.user_id' ,
+					                'userAvatar' ,
+					                'username',
+					                'surename' ,
+					                'birthday',
+					                'userCity',
+					                'userPhone',
+					                'email',
+					                'userInfo'
+					                ]
+			                )
 		                    ->where([
 							    'user.user_id' => Yii::$app->user->getId(),
 							    'status' => User::STATUS_ACTIVE,
@@ -155,7 +167,45 @@ class SiteController extends Controller
 				    'user_details.user_id = user.user_id')
 		    ->one();
 	    }
-        return $this->render('account' ,['account' => $account]);
+	    $inc = [];
+	    foreach ( Yii::$app->request->get() as $item => $value ) {
+			    $inc[$item] = $value;
+	    }
+
+	    if(key($inc) == 'id'){
+	    	$gust_acc = $account = (new \yii\db\Query())
+			    ->from('user')
+			    ->select(
+			    	[	'user.user_id' ,
+				    'userAvatar' ,
+				    'username',
+				    'surename' ,
+				    'birthday',
+				    'userCity',
+				    'userPhone',
+				    'email',
+				    'userInfo'
+			    ])
+			    ->where([
+				    'user.user_id' => intval($inc['id']),
+				    'status' => User::STATUS_ACTIVE,
+			    ])->join(	'inner join',
+				    'user_details',
+				    'user_details.user_id = user.user_id')
+			    ->one();
+		    return $this->render( 'account/main', [
+			    'account'   => $account,
+			    'page'      => 'guest',
+			    'guest_acc' => $gust_acc
+		    ] );
+	    }
+	    else {
+		    return $this->render( 'account/main', [
+			    'account'   => $account,
+			    'page'      => count( $inc ) == 0 ? 'personal' : key( $inc ),
+			    'item_page' => $inc
+		    ] );
+	    }
     }
 
 	public function actionUpload()
@@ -194,9 +244,9 @@ class SiteController extends Controller
         if(!UserSave::find()
             ->where(['user_id' => Yii::$app->user->getId()])
             ->one()){
-        $options = new UserSave();
-        $options->user_id = Yii::$app->user->getId();
-        $options->save();
+	        $options = new UserSave();
+	        $options->user_id = Yii::$app->user->getId();
+	        $options->save();
         }
         return $this->render('signup', [
             'model' => $model,

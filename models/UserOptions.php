@@ -15,8 +15,19 @@ use app\models\UserSave;
 /**
  * UserOptions model
  *
- * @property integer $user_details_id
- * @property integer $user_id
+* @property $userCategories [];
+* @property $userInfo string;
+* @property $userAvatar url image;
+* @property $userImage url image;
+* @property $user_id int;
+* @property $image string;
+* @property $imageFile file;
+* @property $userPhone;
+* @property $userCity;
+* @property $userVK;
+* @property $userFB;
+* @property $userInstagram;
+* @property $userTwitter;
  */
 
 class UserOptions extends Model
@@ -29,8 +40,62 @@ class UserOptions extends Model
     public $user_id;
     public $image;
     public $imageFile;
+	public $userPhone;
+	public $userCity;
+	public $userVK;
+	public $userFB;
+	public $userInstagram;
+	public $userTwitter;
+	public $OldPassword;
+	public $NewPassword;
+	public $ConfirmNewPassword;
 
+	public function attributeLabels() {
+		return array(
+			'userCategories'         => 'Мои категории',
+			'userInfo'           => '',
+			'user_id'           => '',
+			'userAvatar'       => '',
+			'userImage'         => 'Изменить Аватар',
+			'OldPassword'       => 'Текущий пароль',
+			'NewPassword'       => 'Новый пароль',
+			'ConfirmNewPassword' => 'Подтверждение пароля',
+			'userPhone'          => 'Номер телефона'
 
+		);
+	}
+
+	public function rules()
+	{
+		return [
+			[
+
+				[ 'NewPassword', 'ConfirmNewPassword' ],
+				'required',
+				'when' => function ( $model ) {
+					return ( $model->password == $model->conf_password );
+				},
+				'message' => 'Пароли не совпадают',
+				'enableClientValidation' => true
+			],
+			[ 'ConfirmNewPassword', 'compare', 'compareAttribute' => 'NewPassword' ,'message' => 'Пароли не совпадают',],
+			[ [ 'NewPassword', 'ConfirmNewPassword' ], 'string', 'min' => 6 ],
+
+			['OldPassword' , 'validatePassword'],
+			['userPhone', 'string','min'=> 16, 'max'=> 16],
+			['userPhone', 'match', 'pattern' => '/(+7(\[0-9]{6})|0)[-]?[0-9]{7}/'],
+			['user_id', 'integer'],
+			[['userImage'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+			[
+				'userImage',
+				'image',
+				'extensions' => ['jpg', 'jpeg', 'png', 'gif'],
+				'mimeTypes' => ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
+			],
+			['crop_info', 'safe'],
+			//['user_id' , 'integer' , 'notnull']
+		];
+	}
     /**
      * @inheritdoc
      */
@@ -128,29 +193,8 @@ class UserOptions extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            ['user_id', 'integer'],
-            [['userImage'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-            [
-                'userImage',
-                'image',
-                'extensions' => ['jpg', 'jpeg', 'png', 'gif'],
-                'mimeTypes' => ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
-            ],
-            ['crop_info', 'safe'],
-            //['user_id' , 'integer' , 'notnull']
-        ];
-    }
 
-    public function attributeLabels() {
-        return array(
-            'categoryes'         => '',
-            'userInfo'           => '',
-            'user_id'           => '',
-            );
-    }
+
     /**
      * Finds an identity by the given ID.
      * @param string|int $id the ID to be looked for
@@ -211,6 +255,10 @@ class UserOptions extends Model
      * @return bool whether the given auth key is valid.
      * @see getAuthKey()
      */
+	public function validatePassword($password)
+	{
+		return Yii::$app->security->validatePassword($password, $this->password_hash);
+	}
 
     public function validateAuthKey($authKey)
     {
@@ -222,17 +270,16 @@ class UserOptions extends Model
         $test = null;
     try {
         if($userDetails = UserSave::find()
-		    ->where(['user_id_options' => Yii::$app->user->getId()])
+		    ->where(['user_id' => Yii::$app->user->getId()])
 		    ->one()) {
 	        $userDetails->userCategories = json_encode( $this->userCategories );
 	        $userDetails->userAvatar     = $this->base64ToImage( json_decode( $this->userAvatar, true )[0], $this->user_id );
 	        $userDetails->userInfo       = $this->userInfo;
-	        var_dump($userDetails);
 	        $test                        = $userDetails->update();
         }
         else{
 	        $userDetails = new UserSave();
-	        $userDetails->user_id_options        = intval( $this->user_id );
+	        $userDetails->user_id        = intval( $this->user_id );
 	        $userDetails->userCategories = json_encode( $this->userCategories );
 	        $userDetails->userAvatar     = $this->base64ToImage( json_decode( $this->userAvatar, true )[0], $this->user_id );
 	        $userDetails->userInfo       = $this->userInfo;

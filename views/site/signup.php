@@ -49,7 +49,7 @@ if(Yii::$app->user->isGuest){
 
                             <?php $userOptions = new UserOptions(); ?>
                             <?php echo $form->field($userOptions, 'userCategories')->checkboxList(
-                                \yii\helpers\ArrayHelper::map(app\models\Category::find()->all(),
+                                \yii\helpers\ArrayHelper::map(app\models\CategoryModel::find()->all(),
                                     "category_id",
                                     "name"
                                 ), [

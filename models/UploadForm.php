@@ -1,5 +1,5 @@
 <?php
-namespace app\models;
+namespace app\form;
 
 use yii\base\Model;
 use yii\web\UploadedFile;
